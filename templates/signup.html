@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main>
+  <div class="container">
+    <h1>ユーザー登録</h1>
+
+    <form action="{% url 'accounts:signup' %}" method="post">
+    {% csrf_token %}
+        {{ form.as_p }}
+        <p><input type="submit" value="登録"></p>
+    </form>
+  </div>  
+</main>
+
+<style>
+  .helptext {
+    display: block;
+  }
+</style>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main>
+  <div class="container">
+
+    <h2>ログイン画面</h2>
+    <div class="reg">
+      <form action="{% url 'accounts:login' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <!-- ログインページに飛ばされた場合、元々アクセスしようとしていたページがnextに入り、ログイン後はnextに飛ばす -->
+        <p><input type="hidden" name="next" value="{{next}}"></p>
+        <p><input type="submit" value="ログイン"></p>
+      </form>
+    </div>
+    <p class="message">アカウントをお持ちですか？：
+      <a href="{% url 'accounts:signup' %}">アカウントを作成</a>
+    </p>
+
+  </div>
+</main>
+
+<style>
+  h2 {
+    margin-bottom: 50px;
+  }
+  .message {
+    margin: 50px 0;
+  }
+</style>
+
+  {% endblock %}

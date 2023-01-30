@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main>
+ <div class="container">
+  <h2>投稿記事一覧</h2>
+  <ul class="post-list">
+    {% for bulletin in bulletin_list %}
+    <li>
+      <h3><a href="{% url 'bulletin:bulletin_detail' bulletin.pk %}">{{ bulletin.title }}</a></h3>
+      <p class="text">{{ bulletin.text }}</p>
+      <p class="info">{{ bulletin.created_at }} <span>コメント数：{{ bulletin.comment_set.all.count }}件</span></p>
+    </li>
+    {% endfor %}
+  </ul>
+ </div>
+</main>
+
+<style>
+main {
+  background-color: #dae0e6;
+}
+
+main h2 {
+  margin-bottom: 30px;
+}
+
+main .post-list {
+  list-style: none;
+  padding: 0;
+}
+
+main .post-list li {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+main .post-list li .text {
+  margin-bottom: 80px;
+}
+
+main .post-list li .info {
+  margin: 0;
+}
+
+main .post-list li .info span {
+  float: right;
+}
+
+</style>
+
+{% endblock %}

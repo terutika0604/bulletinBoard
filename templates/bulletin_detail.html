@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+  <div class="container">
+    <h2>{{ bulletin.title }}</h2>
+    <div class="article">
+      <span class="data">{{ bulletin.created_at }}</span>
+      <p>{{ bulletin.text }}</p>
+    </div>
+
+    <ul class="comment-list">
+    {% for comment in bulletin.comment_set.all %}
+        <li>
+          <p><span class="name">{{ comment.comment_user }}さん</span>　<span class="comment-data">{{ comment.created_at }}</span></p>
+          <p>{{ comment.comment_text }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+
+    <div class="comment-form">
+      <h3>コメント投稿</h3>
+      <!-- コメント作成用のURLにbulletinの主キーを渡す -->
+      <form action="{% url 'bulletin:comment_create' bulletin.pk %}" method="post">
+        {% csrf_token %}
+        {{ comment_form}}
+        <div>
+          <button type="submit">送信</button>
+        </div>
+      </form>
+    </div>
+
+    <a href="{% url 'bulletin:index' %}" class="back">戻る</a>
+  </div>
+</main>
+
+<style>
+.article {
+  position: relative;
+  background-color:  rgb(239, 239, 239);
+  padding: 20px 5px;
+}
+.article .data {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+}
+h2 {
+  font-weight: bold;
+  padding: 0 5px;
+}
+.comment-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.comment-list li {
+  background-color:  rgb(239, 239, 239);
+  padding: 20px 5px;
+  margin: 20px 0px ;
+}
+.comment-list li .name {
+  color: blue;
+}
+.comment-list li .comment-data {
+  float: right;
+  padding-right: 5px;
+}
+.comment-form {
+  background-color: #dae0e6;
+  padding: 5px 10px;
+  margin-top: 50px;
+}
+.comment-form h3 {
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+input {
+  width: 200px;
+  margin-right: 200px;
+  margin-bottom: 20px;
+}
+.back {
+  margin: 100px 0;
+  display: inline-block;
+}
+</style>
+
+{% endblock %}

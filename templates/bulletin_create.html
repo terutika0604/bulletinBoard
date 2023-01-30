@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+<!-- formの要素にclassをつけるための機能を読み込み -->
+{% load widget_tweaks %}
+
+{% block content %}
+  <main>
+   <div class="container">
+    <h1>記事の作成</h1>
+    <p>こんにちは！{{user.username}}さん</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>{{ form.title.label }}</label>
+            {{ form.title | add_class:'form-control col-2' }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.text.label }}</label>
+            {{ form.text | add_class:'form-control col-2' }}
+        </div>
+        <button type="submit" class="form-control col-1">投稿</button>
+    </form>
+
+    <a href="{% url 'bulletin:index' %}">トップへ戻る</a>
+   </div>
+  </main>
+
+  <style>
+    .form-control {
+      max-width: 100%;
+      width: 200px;
+    }
+    .col-1 {
+      margin: 50px 0;
+      max-width: 100px;
+    }
+  </style>
+{% endblock %}

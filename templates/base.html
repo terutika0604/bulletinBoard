@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="jp">
+{% bootstrap_css %}
+<head>
+    <meta charset="UTF-8">
+    <title>MyDjangoApp</title>
+</head>
+<body>
+  <header>
+    <h1><a href="{% url 'bulletin:index' %}">MyDjangoApp</a></h1>
+    <ul class="header-menu">
+      <li><a href="{% url 'bulletin:bulletin_create' %}">投稿</a></li>
+      <li><a href="{% url 'accounts:logout' %}">ログアウト</a></li>
+    </ul>
+  </header>
+{% block content %}
+{% endblock %}
+
+
+  <style>
+    header {
+      height: 80px;
+      border-bottom: 1px solid black;
+      position: relative;
+    }
+    header h1 {
+      margin: 0;
+      padding-left: 30px;
+      line-height: 80px;
+    }
+    header h1 a {
+      color: black;
+    }
+    .header-menu {
+      position: absolute;
+      top: 25px;
+      right: 23px;
+      display: flex;
+      list-style: none;
+      padding: 0;
+    }
+    .header-menu li {
+      margin-right: 20px;
+      font-size: 20px;
+    }
+    .container {
+      width: 500px;
+      margin: 0 auto;
+    }
+    main {
+      padding: 50px 0;
+    }
+  </style>
+</body>
+</html>
